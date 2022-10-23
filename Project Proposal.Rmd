@@ -9,10 +9,22 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Final Project Proposal/Rubric
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+-   Subject to change as project progresses with instructor approval
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Learning Goals
 
+-   Gain a basic understanding of Python and its function in data science.
+-   Construct a visual/graphical presentation of selected data sets.
+-   Work with 2-3 different types of data sets (quantitative vs quantitative).
+-   Utilize PANDAS package in Python for data analysis.
 
+### Data set(s)
+
+-   Plastic pollution (<https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/readme.md>)
+-   Wealth and Income (<https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-02-09/readme.md>)
+
+### Project
+
+### Rubric
