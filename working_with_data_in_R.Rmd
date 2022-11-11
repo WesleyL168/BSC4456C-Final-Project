@@ -20,7 +20,7 @@ When you click the **Knit** button a document will be generated that includes bo
 ```{r}
 ### Wealth
 
-tuesdata_A <- tidytuesdayR::tt_load('2021-02-09')
+# tuesdata_A <- tidytuesdayR::tt_load('2021-02-09')
 
     
 ```
@@ -29,17 +29,40 @@ tuesdata_A <- tidytuesdayR::tt_load('2021-02-09')
 
 ```{r}
 ### Plastic pollution
-
-tuesdata_B <- tidytuesdayR::tt_load('2021-01-26')
+# 
+# tuesdata_B <- tidytuesdayR::tt_load('2021-01-26')
 
 ```
 
 ```{r}
 
-plastics <- tuesdata_B$plastics
+# plastics <- tuesdata_B$plastics
+# 
+# head(plastics)
+# 
+# as.data.frame(table(plastics$country))
 
-head(plastics)
+```
 
-as.data.frame(table(plastics$country))
+
+
+
+```{r}
+
+pell <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-08-30/pell.csv')
+
+
+```
+
+
+
+
+
+```{python}
+
+
+
+
+
 
 ```
