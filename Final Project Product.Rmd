@@ -4,12 +4,21 @@ author: "Wesley Lim"
 date: "2022-11-20"
 output: html_document
 ---
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+library(reticulate)
+library(tidyverse)
+library(tidytuesdayR)
+```
+
 
 ```{r}
-library(reticulate)
-
+pell <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-08-30/pell.csv')
 
 ```
+
+
+
 
 ```{python}
 ### Python
