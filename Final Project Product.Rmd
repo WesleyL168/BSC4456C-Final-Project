@@ -11,10 +11,13 @@ library(tidyverse)
 library(tidytuesdayR)
 ```
 
+This dataset deals with untidy, raw data for recording global plastic pollution. [https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/readme.md]
+
+Here below, I used R to clean up the data and try to get it into working condition.
 
 ```{r}
-pell <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-08-30/pell.csv')
-
+plastics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-26/plastics.csv')
+glimpse(plastics)
 ```
 
 
