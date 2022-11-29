@@ -27,7 +27,7 @@ Here, I created different objects to group the data set by, creating different p
 ```{r}
 plastics_T_2019 <- plastics %>%
   select(country,grand_total,year) %>%
-  group_by(country)
+  filter(year == 2019)
 
 
 ```
