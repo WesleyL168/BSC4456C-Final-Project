@@ -370,7 +370,42 @@ pre code {
 </div>
 
 
-<pre class="r"><code>pell &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-08-30/pell.csv&#39;)</code></pre>
+<p>This dataset deals with untidy, raw data for recording global plastic
+pollution. [<a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/readme.md" class="uri">https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/readme.md</a>]
+This data set contains data about global plastic pollution in the years
+2019-2020. The data can be categorized by plastic type, country of
+cleanup, and source of plastic. While the data isn’t necessarily an
+accurate representative of plastic pollution, it can give a glimpse into
+the situation given increasing environmental concerns.</p>
+<p>In this project, I aimed to use R to tidy up the data and present
+statistical tests and graphical representations. At the same time, I
+attempted to learn python and use its PANDAS package to perform the same
+tasks if availiable.</p>
+<p>Here, I loaded the dataset and got a sense of what I am working with.
+Verrry untidy data at first glance.</p>
+<pre class="r"><code>plastics &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-26/plastics.csv&#39;)
+glimpse(plastics)</code></pre>
+<pre><code>## Rows: 13,380
+## Columns: 14
+## $ country        &lt;chr&gt; &quot;Argentina&quot;, &quot;Argentina&quot;, &quot;Argentina&quot;, &quot;Argentina&quot;, &quot;Ar…
+## $ year           &lt;dbl&gt; 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2…
+## $ parent_company &lt;chr&gt; &quot;Grand Total&quot;, &quot;Unbranded&quot;, &quot;The Coca-Cola Company&quot;, &quot;S…
+## $ empty          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ hdpe           &lt;dbl&gt; 215, 155, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ ldpe           &lt;dbl&gt; 55, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ o              &lt;dbl&gt; 607, 532, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0,…
+## $ pet            &lt;dbl&gt; 1376, 848, 222, 39, 38, 22, 21, 26, 19, 14, 14, 14, 14,…
+## $ pp             &lt;dbl&gt; 281, 122, 35, 4, 0, 7, 6, 0, 1, 4, 3, 1, 0, 0, 3, 0, 4,…
+## $ ps             &lt;dbl&gt; 116, 114, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ pvc            &lt;dbl&gt; 18, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ grand_total    &lt;dbl&gt; 2668, 1838, 257, 43, 38, 29, 27, 26, 20, 18, 17, 15, 14…
+## $ num_events     &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4…
+## $ volunteers     &lt;dbl&gt; 243, 243, 243, 243, 243, 243, 243, 243, 243, 243, 243, …</code></pre>
+<p>Here, I created different objects to group the data set by, creating
+different perspectives.</p>
+<pre class="r"><code>plastics_T_2019 &lt;- plastics %&gt;%
+  select(country,grand_total,year) %&gt;%
+  group_by(country)</code></pre>
 <pre class="python"><code>### Python
 print(&quot;Hello World&quot;)</code></pre>
 <pre><code>## Hello World</code></pre>

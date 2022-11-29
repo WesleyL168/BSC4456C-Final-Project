@@ -12,14 +12,25 @@ library(tidytuesdayR)
 ```
 
 This dataset deals with untidy, raw data for recording global plastic pollution. [https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/readme.md]
+This data set contains data about global plastic pollution in the years 2019-2020. The data can be categorized by plastic type, country of cleanup, and source of plastic. While the data isn't necessarily an accurate representative of plastic pollution, it can give a glimpse into the situation given increasing environmental concerns.
 
-Here below, I used R to clean up the data and try to get it into working condition.
+In this project, I aimed to use R to tidy up the data and present statistical tests and graphical representations. At the same time, I attempted to learn python and use its PANDAS package to perform the same tasks if availiable.
+
+Here, I loaded the dataset and got a sense of what I am working with. Verrry untidy data at first glance.
 
 ```{r}
 plastics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-26/plastics.csv')
 glimpse(plastics)
 ```
 
+Here, I created different objects to group the data set by, creating different perspectives.
+```{r}
+plastics_T_2019 <- plastics %>%
+  select(country,grand_total,year) %>%
+  group_by(country)
+
+
+```
 
 
 
