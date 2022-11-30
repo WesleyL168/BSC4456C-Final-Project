@@ -9,6 +9,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 library(reticulate)
 library(tidyverse)
 library(tidytuesdayR)
+virtualenv_create("r-reticulate")
 ```
 
 This dataset deals with untidy, raw data for recording global plastic pollution. [https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/readme.md]
@@ -90,13 +91,46 @@ ggplot(plastics_VC_2020, aes(x =volunteers,y=grand_total, label=country)) +
   ylab("Total number of plastic collected")
 
 
+```
+
+Here, I calculated the percentage plastic type for each country. The first table contains total count for each plastic type. The second table contains the percentage of each plastic type out of the grand total amount. For simplicity, I limited to the top 10 countries with the most amount of plastics.
+
+```{r}
+plastics_PT_2020 <- plastics %>%
+  filter(year == 2020) %>%
+  select(country,grand_total,hdpe,ldpe,o,pet,pp,ps,pvc) %>%
+  group_by(country) %>%
+  summarise_all(sum)
+
+head(plastics_PT_2020)
+
+plastics_PT_2020_percent <- plastics_PT_2020 %>%
+  mutate(hdpe = (hdpe/grand_total)*100) %>%
+  mutate(ldpe = (ldpe/grand_total)*100) %>%
+  mutate(o = (o/grand_total)*100) %>%
+  mutate(pet = (pet/grand_total)*100) %>%
+  mutate(pp = (pp/grand_total)*100) %>%
+  mutate(ps = (ps/grand_total)*100) %>%
+  mutate(pvc = (pvc/grand_total)*100) %>%
+  filter(grand_total != "NA") %>%
+  filter(grand_total > 8500) %>%
+  pivot_longer(
+    cols = c(hdpe,ldpe,o,pet,pp,ps,pvc),
+    names_to = "type",
+    values_to = "Percent"
+  )
+
+head(plastics_PT_2020_percent)
+
+ggplot(plastics_PT_2020_percent, aes(x=reorder(country, -grand_total), y = grand_total,fill=type)) +
+  geom_col() +
+  theme_classic() +
+  theme(axis.text.x=element_text(angle=45, hjust=1)) +
+  labs(fill = "Plastic type", x = "Country", y = "Total plastic collected", title = "Nations with most plastic count by plastic type")
 
 
 ```
 
-
 ```{python}
-### Python
-print("Hello World")
 
 ```
