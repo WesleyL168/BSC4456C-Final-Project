@@ -14,7 +14,7 @@ library(tidytuesdayR)
 This dataset deals with untidy, raw data for recording global plastic pollution. [https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/readme.md]
 This data set contains data about global plastic pollution in the years 2019-2020. The data can be categorized by plastic type, country of cleanup, and source of plastic. While the data isn't necessarily an accurate representative of plastic pollution, it can give a glimpse into the situation given increasing environmental concerns.
 
-In this project, I aimed to use R to tidy up the data and present statistical tests and graphical representations. At the same time, I attempted to learn python and use its PANDAS package to perform the same tasks if availiable.
+In this project, I aimed to use R to tidy up the data and present statistical tests and graphical representations. At the same time, I attempted to learn python and use its PANDAS package to perform the same tasks if available.
 
 Here, I loaded the dataset and got a sense of what I am working with. Verrry untidy data at first glance.
 
@@ -23,15 +23,76 @@ plastics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/t
 glimpse(plastics)
 ```
 
-Here, I created different objects to group the data set by, creating different perspectives.
+Below, I created different objects to group the data set by, creating different perspectives. I focused on more recent 2020 data.
+
+This shows the top 10 countries with the most number of companies traced as sources of plastic collected. Countries with large economies like USA and China are among the top 10, which makes sense as they would likely be the highest producer and consumers of plastic. However, this does not indicate WHERE the plastic may end up being collected.
 ```{r}
-plastics_T_2019 <- plastics %>%
-  select(country,grand_total,year) %>%
-  filter(year == 2019)
+
+plastics_TP_2020 <- plastics %>%
+  filter(year == 2020) %>%
+  group_by(country) %>%
+  count(country) %>%
+  filter(n > 130)
+
+ggplot(plastics_TP_2020, aes(x = reorder(country, -n), y = n)) +
+  geom_col() +
+  theme_classic() +
+  theme(axis.text.x=element_text(angle=45, hjust=1)) +
+  ggtitle("Number of companies linked to plastic source") +
+  xlab("Country") +
+  ylab("Number of companies")
+  
+
+```
+
+Next, I tried to see if there is any correlation with percentage plastic type for each country. We see that only Nigeria and Indonesia overlap between this chart and the previous. This suggests that a lot of plastic collected in Nigeria and Indonesia can be traced back to their own companies. This also implies that major economies like USA and China are producing a lot of plastic and most can be traced to other less developed nations (the possibility of under representation in major countries like USA and China also exists). 
+```{r}
+plastics_GT_2020 <- plastics %>%
+  filter(year == 2020) %>%
+  select(country,grand_total) %>%
+  group_by(country) %>%
+  summarize(Total = sum(grand_total)) %>%
+  filter(Total > 8500)
+
+ggplot(plastics_GT_2020, aes(x = reorder(country, -Total), y = Total)) +
+  geom_col() +
+  theme_classic() +
+  theme(axis.text.x=element_text(angle=45, hjust=1)) +
+  ggtitle("Number of plastic collected") +
+  xlab("Country") +
+  ylab("Total plastic collected")
 
 
 ```
 
+
+
+Up to this point, I realized that the data can be extremely biased since it relies on feedback from plastic clean up organizations. Not every country is given the same resources to track and clean up plastic pollution. 
+
+The chart below shows the number of volunteers participated in each country versus the total amount of plastic collected. Nigeria, once again, is distinct from the other countries. Nigeria saw a large number of volunteers participating in the clean up and resulted in a high amount of plastics collected, a clear positive correlation between total amount of plastic collected to amount of volunteers. This correlation is observed with the USA and a majority of nations in the lower range.
+
+However, Switzerland, Philippines, and China don't seem to follow this correlation. This could be the case in low plastic collection rate for 2020 (in China's case, which seems odd), or high plastic pollution in Switzerland and Philippines.
+```{r}
+plastics_VC_2020 <- plastics %>%
+  filter(year == 2020) %>%
+  select(country, volunteers, grand_total) %>%
+  group_by(country) %>%
+  filter(volunteers != "NA", grand_total != "NA", country != "EMPTY") %>%
+  summarise_all(sum)
+
+ggplot(plastics_VC_2020, aes(x =volunteers,y=grand_total, label=country)) +
+  geom_point() +
+  geom_text(aes(label=ifelse(grand_total>20000,as.character(country),'')),size = 3.5, vjust = 1.5) +
+  geom_text(aes(label=ifelse(volunteers>100000,as.character(country),'')),size = 3.5, vjust = 1.5) +
+  theme_classic() +
+  ggtitle("Total number of volunteers vs Total number of plastic collected") +
+  xlab("Number of Volunteers") +
+  ylab("Total number of plastic collected")
+
+
+
+
+```
 
 
 ```{python}
