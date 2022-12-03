@@ -64,6 +64,7 @@ ggplot(plastics_TP_2020, aes(x = reorder(country, -n), y = n)) +
 
 This python code is something I have been trying to solve for the last week of class, but haven't been able to solve. Even after following multiple guides, I don't seem to be able to download and install Tcl for this code to knit properly. However, this graph that shows number of total plastic count for all countries is able to run on in Rstudio.
 ```{python}
+##Python
 
 # plastics_2020 = plastics.query('year == 2020')
 # 
@@ -171,3 +172,6 @@ ggplot(plastics_PT_2020_percent, aes(x=country,y= (total_percent/7), fill=type))
   theme(axis.text.x=element_text(angle=45, hjust=1)) +
   labs(fill = "Plastic type", x = "Country", y = "Total percent", title = "Nations with most plastic count by plastic type")
 ```
+
+
+Overall I enjoyed working on this final project.I wish I dived deeper into the data beforehand since I didn't get to do much statistical analysis. While this project didn't result in the goal of using python too much to analyze data, I found that R was much better suited for visual representation of data. With python, I liked the easy access of creating quick descriptions with PANDAS and sorting data. I'd imagine I would continue to use R for pure data analysis and sorting through experimental data, but I will love to keep learning to write programs with python to write code to supplement research work.
