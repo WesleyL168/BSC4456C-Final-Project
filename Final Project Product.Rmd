@@ -14,6 +14,7 @@ use_virtualenv("r-reticulate")
 virtualenv_exists()
 virtualenv_root()
 py_install("pandas")
+py_install("matplotlib")
 ```
 
 This dataset deals with untidy, raw data for recording global plastic pollution. [https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-26/readme.md]
@@ -59,6 +60,24 @@ ggplot(plastics_TP_2020, aes(x = reorder(country, -n), y = n)) +
   
 
 ```
+
+
+This python code is something I have been trying to solve for the last week of class, but haven't been able to solve. Even after following multiple guides, I don't seem to be able to download and install Tcl for this code to knit properly. However, this graph that shows number of total plastic count for all countries is able to run on in Rstudio.
+```{python}
+
+# plastics_2020 = plastics.query('year == 2020')
+# 
+# plastics_2020_T1 = plastics_2020.drop(columns=["num_events","volunteers","parent_company","year"])
+# plastics_2020_T1 = plastics_2020_T1.groupby(["country"]).describe()
+# plastics_2020_T1.head()
+# 
+# plastics_2020_total = plastics_2020.filter(items = ["country","grand_total"])
+# plastics_2020_total = plastics_2020_total.groupby(["country"]).sum()
+# plastics_2020_total.plot.bar()
+
+```
+
+
 
 Next, I tried to see if there is any correlation with percentage plastic type for each country. We see that only Nigeria and Indonesia overlap between this chart and the previous. This suggests that a lot of plastic collected in Nigeria and Indonesia can be traced back to their own companies. This also implies that major economies like USA and China are producing a lot of plastic and most can be traced to other less developed nations (the possibility of under representation in major countries like USA and China also exists). 
 ```{r}
@@ -151,10 +170,4 @@ ggplot(plastics_PT_2020_percent, aes(x=country,y= (total_percent/7), fill=type))
   theme_classic() +
   theme(axis.text.x=element_text(angle=45, hjust=1)) +
   labs(fill = "Plastic type", x = "Country", y = "Total percent", title = "Nations with most plastic count by plastic type")
-```
-
-```{python}
-import pandas as pd
-plastics = pd.read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-26/plastics.csv')
-
 ```
