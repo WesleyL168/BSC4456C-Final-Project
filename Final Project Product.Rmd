@@ -28,6 +28,7 @@ Here, I loaded the dataset and got a sense of what I am working with. Verrry unt
 ## R
 plastics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-26/plastics.csv')
 glimpse(plastics)
+
 ```
 
 ```{python}
@@ -75,6 +76,7 @@ This python code is something I have been trying to solve for the last week of c
 # plastics_2020_total = plastics_2020.filter(items = ["country","grand_total"])
 # plastics_2020_total = plastics_2020_total.groupby(["country"]).sum()
 # plastics_2020_total.plot.bar()
+# plt.show()
 
 ```
 
@@ -175,3 +177,5 @@ ggplot(plastics_PT_2020_percent, aes(x=country,y= (total_percent/7), fill=type))
 
 
 Overall I enjoyed working on this final project.I wish I dived deeper into the data beforehand since I didn't get to do much statistical analysis. While this project didn't result in the goal of using python too much to analyze data, I found that R was much better suited for visual representation of data. With python, I liked the easy access of creating quick descriptions with PANDAS and sorting data. I'd imagine I would continue to use R for pure data analysis and sorting through experimental data, but I will love to keep learning to write programs with python to write code to supplement research work.
+
+
